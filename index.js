@@ -4,7 +4,7 @@ const message = document.querySelector('#message')
 const addMovie = (evt) =>{
 evt.preventDefault()
 const inputField = document.querySelector('input')
-console.log(inputField)
+// console.log(inputField)
 
 const movie = document.createElement('li')
 const movieTitle = document.createElement('span')
@@ -28,14 +28,25 @@ document.querySelector('form').addEventListener('submit',addMovie)
 const deleteMovie = (evt) => {
     evt.target.parentNode.remove()
     message.textContent = 'Movie Deleted'
+    revealMessage()
+    message.textContent=`${evt.target.parentNode.firstChild.textContent} is deleted`
 }
 
 const crossOffMovie = (evt) => {
     evt.target.classList.toggle('checked')
     if(evt.target.classList.contains('checked')=== true){
         message.textContent = `Movie Watched!`
+        message.textContent=`${evt.target.textContent} watched!`
     }else {
         message.textContent = `Movie added back`
+        message.textContent=`${evt.target.textContent} added back!`
     }
+    revealMessage()
 }
 
+function revealMessage() {
+    message.classList.remove('hide')
+    setTimeout(() => { 
+        message.classList.add('hide')
+    }, 1000);
+}
